@@ -1,2 +1,2 @@
-# remote-gpt
-Run any open-source LLM, such as Llama 3 and Mistral 7B, as a Google Colab-compatible API endpoint.
+# RemoteGPT API Endpoint
+<q>In a nutshell: Run any open-source LLM, from Mistral 7B to Llama 3, on a remote server as an API endpoint. RemoteGPT is compatible with [Google Colab](https://colab.research.google.com/), allowing you to run LLM inference on free cloud compute provided by Colab.</q>
