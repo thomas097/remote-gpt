@@ -2,21 +2,31 @@ import time
 import threading
 from pyngrok import ngrok
 from flask import Flask, request, jsonify
-from hosting import authenticate, Config, pprint, ask_confirm
+
+from models.llms import LLM
+from server.config import Config
+from server.authenticate import authenticate
+from server.formatting import pprint, ask_confirm
 
 
 app = Flask(__name__)
-llm = None
+model: LLM = None
 
 @app.route('/text', methods=['POST'])
 def POST_request_handler():
     text = request.get_json()['text']
 
-    response = {
-        "success": True,
-        "response": "this is my response!"
-    }
+    try:
+        content = model.chat_completion(prompt=text)
+        success = True
+    except:
+        content = "ERROR"
+        success = False
 
+    response = {
+        "success": success,
+        "content": content
+    }
     return jsonify(response)
 
 
@@ -30,7 +40,10 @@ def main(config: Config):
     # Set Flask's URL to the public ngrok URL
     app.config["BASE_URL"] = public_url
 
-    # TODO: initialize LLM
+    model = LLM(
+        model_name=config.model_name,
+        sys_prompt=config.sys_prompt
+        )
 
     # Start Flask server in a new thread
     pprint(f"Booting up '{app.name}'", rule=True)

@@ -1,2 +1,5 @@
 port = 80
 authtoken = ""
+
+# Do not change!
+model_registry = "models/registry.toml"

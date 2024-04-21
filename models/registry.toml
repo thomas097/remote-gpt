@@ -1,0 +1,5 @@
+# YOU CAN ADD NEW MODELS HERE!
+
+[mistral-7b-openorca-q5]
+download_url = "https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q5_K_M.gguf"
+chat_format = "chatml"
